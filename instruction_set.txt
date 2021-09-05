@@ -1,12 +1,12 @@
-LOAD R(dst) XY(src)
-LOADLITERAL R(dst) XY(src)
-STORE R(src) [XY](dst)
-MOVE R(src) R(dst)
-ADDINT R(dst) R(a) R(b)
-ADDFLOAT R(dst) R(a) R(b)
-OR R(dst) R(a) R(b)
-AND R(dst) R(a) R(b)
-XOR R(dst) R(a) R(b)
-ROTATE R 0 X(times)
-JUMP R(conditional matches R0) XY(dst)
+MOVE [XY] R
+MOVE XY R
+MOVE R [XY]
+MOVE R R
+IADD R R R
+FADD R R R
+OR R R R
+AND R R R
+XOR R R R
+ROTATE R X
+JUMP R [XY]
 HALT
