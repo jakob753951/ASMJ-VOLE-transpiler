@@ -68,10 +68,14 @@ def operator(words: list[str]) -> str:
 def rotate(words: list[str]) -> str:
 	return f'A{words[1]}0{words[2]}'
 
-def jump(words: list[str]) -> str: # JUMP R mark = BRXY
-	dest_mark = words[2]
+def jump(words: list[str]) -> str:
+	is_conditional = words[0].upper() == 'CJUMP'
+
+	dest_mark = words[2 if is_conditional else 1]
+
 	dest_str = int_2_hex(marks[dest_mark])
-	return f'B{words[1]}{dest_str}'
+
+	return f'B{words[1] if is_conditional else 0}{dest_str}'
 
 def halt_and_catch_fire(_):
 	pass
@@ -85,6 +89,7 @@ instructions = {
 	'XOR': operator,
 	'ROTATE': rotate,
 	'JUMP': jump,
+	'CJUMP': jump,
 	'HALT': lambda _: 'C000',
 	'HCF': halt_and_catch_fire,
 	'HACF': halt_and_catch_fire
