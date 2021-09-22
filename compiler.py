@@ -59,7 +59,7 @@ def move(words: list[str]) -> str:
 		return f'3{words[1]}{addr_value(words[2])}'
 	if src_type == ARG_TYPE.REGISTER and dst_type == ARG_TYPE.REGISTER:
 		return f'40{words[1]}{words[2]}'
-	raise Exception('Address not read correctly')
+	raise ValueError('Address not read correctly')
 
 def operator(words: list[str]) -> str:
 	operator, a, b, dest = words
