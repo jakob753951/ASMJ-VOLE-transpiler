@@ -11,7 +11,8 @@ args = parser.parse_args()
 with open(args.source, 'r') as in_file:
 	src_txt = in_file.read()
 
-vole_code = compile_vole(src_txt, int(args.starting_position, 16))
+starting_position = int(args.starting_position, 16)
+vole_code = compile_vole(src=src_txt, start_pos=starting_position)
 
 with open(args.destination, 'w' if exists(args.destination) else 'x') as out_file:
 	out_file.write(vole_code)
