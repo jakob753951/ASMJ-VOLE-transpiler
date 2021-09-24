@@ -1,4 +1,5 @@
 import re
+from variable import Variable
 
 
 class ARG_TYPE:
@@ -14,7 +15,9 @@ operators = [
 	'XOR'
 ]
 
-marks = {}
+marks: dict[str, int] = {}
+
+variables: list[Variable] = []
 
 def set_marks(lines: list[str], start_pos: int):
 	out_lines = []
@@ -26,7 +29,6 @@ def set_marks(lines: list[str], start_pos: int):
 			continue
 		out_lines.append(line)
 		i += 2
-	
 	return out_lines
 
 def int_2_hex(num: int) -> str:

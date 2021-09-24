@@ -1,0 +1,15 @@
+MOVE [XY] R  | Moves the data at the address XY into register R
+MOVE XY R    | Moves the literal data XY into register R
+MOVE R [XY]  | Moves the value in register R to the address XY
+MOVE A B     | Moves the value in register A into register B
+ADD A B D    | Does INTEGER addition on the values in registers A and B and puts the result into register D
+OR A B D     | Applies the OR operation on the values in registers A and B and puts the result into register D
+AND A B D    | Applies the AND operation on the values in registers A and B and puts the result into register D
+XOR A B D    | Applies the XOR operation on the values in registers A and B and puts the result into register D
+ROTATE R X   | Rotates the bits in register R, X times
+JUMP mark    | Jumps to the mark
+CJUMP R mark | Jumps to the mark only if the value in register R is equal to the value in register 0, otherwise does nothing
+HALT         | Halts execution
+
+//defines a jump destination
+mark:

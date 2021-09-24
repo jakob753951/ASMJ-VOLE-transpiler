@@ -5,7 +5,8 @@ from compiler import compile_vole
 parser = argparse.ArgumentParser(description='Transpile ASMJ to a VOLE program.')
 parser.add_argument('source', type=str)
 parser.add_argument('destination', type=str)
-parser.add_argument('-s', '--starting_position', type=str, default='C0')
+parser.add_argument('-s', '--program-starting-position', type=str, default='00')
+parser.add_argument('-v', '--variables-starting-position', type=str, default='C0')
 args = parser.parse_args()
 
 with open(args.source, 'r') as in_file:
