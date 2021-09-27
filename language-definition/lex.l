@@ -1,11 +1,13 @@
 %{
-#include >stdio.h>
+#include <stdio.h>
 #include "y.tab.h"
+extern int yylval;
 %}
 
 %%
-	[a-zA-Z][a-zA-Z0-9]* return identifier;
-	[1-9][0-9]* return literal;
-	\n
-	[ \t]+
+(int|float) return TYPE;
+[1-9][0-9]* return LITERAL;
+[a-zA-Z][a-zA-Z0-9]* return IDENTIFIER;
+\n
+[ \t]+
 %%
