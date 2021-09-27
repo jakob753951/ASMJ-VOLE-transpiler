@@ -41,6 +41,25 @@ def addr_value(word: str) -> str:
 		return None
 	return match[0]
 
+def parse_literal(word: str) -> str:
+	char_to_base = {
+		'x': 16,
+		'd': 10,
+		'o': 8,
+		'b': 2
+	}
+	
+	m = re.search(r'(?<=0[xdob]).+', word)
+	if not m:
+		return word # no format specified, so interpret as hex
+	num = m[0]
+
+	base = char_to_base[word[1]]
+
+	i = int(num, base)
+	if i > 255:
+		raise ValueError("Literals cannot exceed 0xFF")
+	return str.zfill(hex(i)[2:], 2)
 
 def get_arg_type(word: str) -> ARG_TYPE:
 	if addr_value(word):
@@ -54,7 +73,7 @@ def move(words: list[str]) -> str:
 	if src_type == ARG_TYPE.ADDRESS and dst_type == ARG_TYPE.REGISTER:
 		return f'1{words[2]}{addr_value(words[1])}'
 	if src_type == ARG_TYPE.LITERAL and dst_type == ARG_TYPE.REGISTER:
-		return f'2{words[2]}{words[1]}'
+		return f'2{words[2]}{parse_literal(words[1])}'
 	if src_type == ARG_TYPE.REGISTER and dst_type == ARG_TYPE.ADDRESS:
 		return f'3{words[1]}{addr_value(words[2])}'
 	if src_type == ARG_TYPE.REGISTER and dst_type == ARG_TYPE.REGISTER:
