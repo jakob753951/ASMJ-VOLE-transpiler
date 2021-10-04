@@ -125,5 +125,10 @@ def compile_vole(src: str, start_pos: int):
 	src_lines = set_marks(src_lines, start_pos)
 	start_str = int_2_hex(start_pos)
 	out_lines = [f'[PC]{start_str}', f'[{start_str}]']
-	out_lines.extend([convert_line(line) for line in src_lines])
+	for line in src_lines:
+		try:
+			full_line = convert_line(line)
+		except Exception:
+			full_line = line
+		out_lines.append(full_line)
 	return '\n'.join(out_lines).upper()
